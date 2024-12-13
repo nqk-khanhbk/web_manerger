@@ -1,0 +1,121 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header Styles */
+.header {
+    background-color: #7b9025b8;  /* Dark background for the header */
+    padding: 20px 0;  /* Space above and below */
+    font-size: 20px;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1400px;  /* Max width for large screens */
+    margin: 0 auto;  /* Center the container */
+    padding: 0 20px;  /* Add space on left and right */
+}
+
+/* Row */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo Styles */
+.inner-logo img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Menu Styles */
+.inner-menu{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.inner-menu ul {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+}
+
+.inner-menu li {
+    margin-top: 10px;
+    font-size: 24px;
+    color: #ddd;
+}
+
+.inner-menu a {
+    text-decoration: none;
+    color: #ddd;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    
+}
+
+.inner-menu li a:hover {
+    color: orange;
+    border-bottom: 2px solid rgba(184, 124, 12, 0.685);
+}
+
+/* Login and Register Styles */
+.inner-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.login, .logout {
+    cursor: pointer;
+    color: #000;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    background: #4CAF50;
+}
+
+.login:hover, .logout:hover {
+    color: #555;
+    background-color: #4caf63a4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .inner-menu ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .inner-right {
+        justify-content: center;
+    }
+}
+
+/* css cho footer */
+.footer {
+    font-size: 24px;
+    text-align: center;
+    background: #7b9025b8;
+    font-weight: 600;
+    padding: 10px;
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 999; 
+}
