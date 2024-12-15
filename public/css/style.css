@@ -17,7 +17,6 @@
     width: 100%;
     max-width: 1400px;  /* Max width for large screens */
     margin: 0 auto;  /* Center the container */
-    padding: 0 20px;  /* Add space on left and right */
 }
 
 /* Row */
@@ -118,4 +117,88 @@
     left: 0; 
     width: 100%; 
     z-index: 999; 
+}
+
+ /* Css trang product */
+
+ /* Tạo kiểu cho container tổng thể */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Định dạng cho hàng (row) */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+/* Định dạng cho phần tiêu đề của sản phẩm */
+.box-head h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    margin-top: 20px;
+}
+/* Định dạng hộp sản phẩm */
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Định dạng cho hình ảnh sản phẩm */
+.product-item .inner-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Định dạng cho phần mô tả hoặc thông tin sản phẩm */
+.product-item .inner-content{
+    padding: 10px;
+    color: #4CAF50;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    gap:5px;
+}
+.product-item .inner-content .inner-price{
+    font-size: 20px;
+    color: red;
+
+}
+/* Kiểu cho nút thêm vào giỏ hàng hoặc các thao tác khác */
+.product-item .actions {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-item .actions .button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.product-item .actions .button:hover {
+    background-color: #0056b3;
+}
+
+/* Đảm bảo các phần tử trên di động */
+@media (max-width: 768px) {
+    .col-4 {
+        flex: 1 1 100%;
+    }
 }
