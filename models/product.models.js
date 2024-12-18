@@ -1,3 +1,5 @@
+const  mongoose  = require("mongoose");
+
 const schemaProducts = new mongoose.Schema({
   title: String,
   description: String,
@@ -9,6 +11,6 @@ const schemaProducts = new mongoose.Schema({
   position: String,
   deleted: Boolean,
 });
-const Product = mongoose.model("Product", schemaProducts, "products");
+const Product = mongoose.model("Product", schemaProducts, "Products");
 
 module.exports = Product;
