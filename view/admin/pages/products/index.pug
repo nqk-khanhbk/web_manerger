@@ -1,5 +1,6 @@
 extends ../../layout/defaul.pug
-
+include ../../mixins/filles-status.pug
+include ../../mixins/search.pug
 block main
   h1 Danh sách sản phẩm
 
@@ -8,14 +9,9 @@ block main
     .card-body
       .row 
         .col-6
-          each item in filleStatus
-            button(class = `btn btn-sm ml-1 btn-outline-success ${item.class}` button-status= item.status) #{item.name}
+          +filleStatus(filleStatus)
         .col-6 
-          form(id="form-search")
-            .input-group
-              input(type="text" class="form-control" name="keyword" placeholder="Tìm kiếm ở đây" value = keyword)
-              .input-group-append
-                button(class="btn btn-success" type="submit") Tìm
+          +search(keyword)
                 
   table.table.table-hover.table-sm 
     thead
@@ -42,3 +38,17 @@ block main
           td
             button(class="btn btn-primary btn-sm" data-id=item.id) Sửa
             button(class="btn btn-danger btn-sm ml-1" data-id=item.id) Xóa
+  
+  nav  
+    ul(class="pagination justify-content-center")
+      if(pagination.currentPage > 1)
+        li(class=`page-item ${pagination.currentPage == 1 ? "disable" : " "}` button-pagination=pagination.currentPage - 1)
+          button(class=`page-link`) Trang trước
+      - for(var i=1;i<=pagination.totalPages;i++)
+        li(class=`page-item ${pagination.currentPage == i ? "active" : " "}`)
+          button(class="page-link" button-pagination = i) #{i}
+      if(pagination.currentPage < pagination.totalPages)
+        li(class="page-item")
+          button(class="page-link" button-pagination=pagination.currentPage + 1) Kế tiếp
+
+
