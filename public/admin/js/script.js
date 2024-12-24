@@ -53,3 +53,62 @@ if(buttonPagination){
 }
 
 //end paginattion
+
+// phần chỉnh sửa nhiều sp
+const checkAllMutil = document.querySelector("[checkall-multi]")
+if(checkAllMutil){
+    const inputcheckAll = checkAllMutil.querySelector("input[class='checkall']")
+    const inputIds = checkAllMutil.querySelectorAll("input[class='id']");
+    // console.log(inputIds)
+    inputcheckAll.addEventListener("click",()=>{
+        if(inputcheckAll.checked){        
+            inputIds.forEach(input=>{
+                input.checked=true;
+            })
+        }
+        else{
+            inputIds.forEach(input=>{
+                input.checked=false;
+            })
+        }
+    });
+   inputIds.forEach(input=>{
+        input.addEventListener("click",()=>{
+            const countCheck = checkAllMutil.querySelectorAll("input[class='id']:checked").length;
+            // console.log(countCheck)
+            // console.log(inputIds.length)
+            if(countCheck == inputIds.length){
+                inputcheckAll.checked = true;
+            }
+            else{
+                inputcheckAll.checked = false;
+            }
+        })
+   })
+}
+
+// form change multi
+const formChangeMulti = document.querySelector("[form-change-multi]")
+if(formChangeMulti){
+    formChangeMulti.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        const checkAllMutil = document.querySelector("[checkall-multi]");
+        const inputChecked = checkAllMutil.querySelectorAll("input[class='id']:checked");
+
+        if(inputChecked.length > 0){
+            let ids = [];
+            const inputIds = formChangeMulti.querySelector("input[name='ids']");
+            inputChecked.forEach(input=>{
+                const id = input.value;
+                ids.push(id);
+            });
+            inputIds.value = ids.join(", ");
+        //     console.log(inputIds.value)
+            formChangeMulti.submit();
+        }
+        else{
+            alert("Xin vui lòng nhập!")
+        }
+    })
+}
+// end chỉnh sửa nhiều sp

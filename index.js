@@ -1,4 +1,6 @@
 const express = require('express');
+var methodOverride = require('method-override')
+var bodyParser = require('body-parser')
 const app = express();
 const database = require('./config/database.js');
 //cấu hình env
@@ -13,6 +15,11 @@ const systemConfig = require('./config/system.js');
 database.connect();
 //end connect database
 
+//method-override
+app.use(methodOverride('_method'))
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.set('views', './view');
 app.set('view engine', 'pug');
