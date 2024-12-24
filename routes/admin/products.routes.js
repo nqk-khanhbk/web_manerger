@@ -8,4 +8,5 @@ router.get('/',controllers.index)
 router.patch('/change-status/:status/:id',controllers.changeStatus)
 
 router.patch('/change-multi',controllers.changeMultis)
+router.delete('/delete/:id',controllers.deleteButton)
 module.exports=router;

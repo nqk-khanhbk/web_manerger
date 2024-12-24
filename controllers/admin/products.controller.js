@@ -91,3 +91,12 @@ module.exports.changeMultis = async (req,res)=>{
     }
     res.redirect("back");   
 }
+
+// xóa sản phẩm
+module.exports.deleteButton = async(req,res)=>{
+    const id = req.params.id;
+    // xóa cứng 1 sản phẩm trong database
+    await Products.deleteOne({_id:id});
+    // xóa mềm 1 sản phẩm trong database
+    res.redirect("back");//quay lại trang
+}
