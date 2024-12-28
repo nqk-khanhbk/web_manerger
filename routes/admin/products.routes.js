@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const controllers = require('../../controllers/admin/products.controller');
+//upload ảnh
+const multer  = require('multer');
+const storegeImage = require('../../helpers/storegeImage');
+const upload = multer({ storage:storegeImage() });
 //code phần router
 router.get('/',controllers.index)
 
@@ -11,5 +15,5 @@ router.patch('/change-multi',controllers.changeMultis)
 router.delete('/delete/:id',controllers.deleteButton)
 
 router.get('/create',controllers.create)
-router.post('/create',controllers.createPost)
+router.post('/create',upload.single('thumbnail'),controllers.createPost)
 module.exports=router;
