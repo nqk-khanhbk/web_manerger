@@ -3,9 +3,13 @@ include ../../mixins/filles-status.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/change-multi.pug
-block main
-  h1 Danh sách sản phẩm
+include ../../mixins/alert.pug
 
+block main
+  
+  +alert-success("5000")
+
+  h1 Danh sách sản phẩm
   .card.mb-3
     .card-header Bộ lọc và tìm kiếm 
     .card-body
@@ -18,8 +22,14 @@ block main
   .card.mb-3 
     .card-header Danh sách 
       .card-body 
-        +change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-
+        .row
+          .col-8
+            +change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+          .col-4 
+            a(
+              href=`${prefixAdmin}/products/create`
+              class="btn btn-outline-success"
+            ) +Thêm mới
         table(class="table table-hover table-sm" checkall-multi)
           thead
             tr 
@@ -29,6 +39,7 @@ block main
               th Hình ảnh 
               th Tiêu đề
               th Giá
+              th Vị trí
               th Trạng thái 
               th Hành động
           tbody
@@ -45,6 +56,13 @@ block main
                   img(src=item.thumbnail alt=item.title width="100px" height="auto")
                 td #{item.title}
                 td #{item.price}$
+                td 
+                  input(
+                    type="number"
+                    min="1" name="position"
+                    value = item.position 
+                    style ="width:50px"
+                  )
                 td 
                   if item.status == 'active'
                     a(

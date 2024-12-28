@@ -95,12 +95,31 @@ if(formChangeMulti){
         const checkAllMutil = document.querySelector("[checkall-multi]");
         const inputChecked = checkAllMutil.querySelectorAll("input[class='id']:checked");
 
+        //xóa nhiều sản phẩm
+        const typeChange = e.target.elements.type.value;
+        console.log(typeChange);
+
+        if(typeChange == "delete-all"){
+            const inconfirm = confirm("Bạn có muốn xóa nhiều sản phẩm không?")
+            if(!inconfirm){
+                return;
+            }
+        }
+        // end xóa nhiều sp
         if(inputChecked.length > 0){
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
             inputChecked.forEach(input=>{
                 const id = input.value;
-                ids.push(id);
+                if(typeChange == "change-position"){
+                    const position = input.closest("tr").querySelector("input[name='position']").value;
+                    // console.log(`${id}-${position}`)
+                    ids.push(`${id}-${position}`)
+                }
+                else{
+                    ids.push(id);
+                }
+                
             });
             inputIds.value = ids.join(", ");
         //     console.log(inputIds.value)
@@ -112,3 +131,54 @@ if(formChangeMulti){
     })
 }
 // end chỉnh sửa nhiều sp
+
+//show alert thông báo'
+// const showAlert = document.querySelector("[show-alert]");
+// if(showAlert){
+//     const dataTime = parseInt(showAlert.getAttribute("data-time"));
+//     const closeAlert = showAlert.querySelector("[close-alert]")
+//     console.log(closeAlert)
+//     setTimeout(()=>{
+//         showAlert.classList.add("alert-hidden");
+//     },dataTime)
+//     closeAlert.addEventListener("click",()=>{
+//         showAlert.classList.add("alert-hidden");
+//     })
+// }
+
+// Show alert thông báo
+const showAlert = document.querySelector("[show-alert]");
+
+if (showAlert) {
+    const dataTime = parseInt(showAlert.getAttribute("data-time"));
+    const closeAlert = showAlert.querySelector("[close-alert]");
+    const progressBar = showAlert.querySelector("[progress-bar]");
+    
+    // Set width của progress bar theo thời gian
+    let currentTime = dataTime;
+    const interval = 100; // Cập nhật mỗi 100ms
+    const step = interval / dataTime * 100; // Mỗi bước giảm bao nhiêu %
+
+    const progressInterval = setInterval(() => {
+        currentTime -= interval;
+        const widthPercentage = (currentTime / dataTime) * 100;
+        progressBar.style.width = `${widthPercentage}%`;
+
+        if (currentTime <= 0) {
+            clearInterval(progressInterval);
+            showAlert.classList.add("alert-hidden");
+        }
+    }, interval);
+
+    // Ẩn thông báo khi bấm vào nút close
+    closeAlert.addEventListener("click", () => {
+        clearInterval(progressInterval);
+        showAlert.classList.add("alert-hidden");
+    });
+
+    // Ẩn thông báo tự động sau thời gian quy định
+    setTimeout(() => {
+        clearInterval(progressInterval);
+        showAlert.classList.add("alert-hidden");
+    }, dataTime);
+}
