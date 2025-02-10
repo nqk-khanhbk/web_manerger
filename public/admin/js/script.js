@@ -93,7 +93,7 @@ if(formChangeMulti){
     formChangeMulti.addEventListener("submit",(e)=>{
         e.preventDefault();
         const checkAllMutil = document.querySelector("[checkall-multi]");
-        const inputChecked = checkAllMutil.querySelectorAll("input[class='id']:checked");
+        const inputChecked = checkAllMutil.querySelectorAll("input[class='id']:checked");//LẤY ra những ô input đã ckeck
 
         //xóa nhiều sản phẩm
         const typeChange = e.target.elements.type.value;
@@ -106,6 +106,7 @@ if(formChangeMulti){
             }
         }
         // end xóa nhiều sp
+
         if(inputChecked.length > 0){
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
@@ -182,3 +183,17 @@ if (showAlert) {
         showAlert.classList.add("alert-hidden");
     }, dataTime);
 }
+
+// phần upload-image-preview
+const uploadImage = document.querySelector("[upload-image]");
+const uploadImageInput = document.querySelector("[upload-image-input]");
+const uploadImagePreview = document.querySelector("[upload-image-preview]");
+if(uploadImage){
+    uploadImageInput.addEventListener("change",(e)=>{
+        const file = e.target.files[0];
+        if(file){
+            uploadImagePreview.src = URL.createObjectURL(file)
+        }
+    })
+}
+

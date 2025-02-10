@@ -11,6 +11,8 @@ module.exports.index = async (req,res)=>{
    
     const filleStatus = FilleStatusHelpers(req.query);
     //  console.log(filleStatus)
+
+    //phần này chứa điều kiện muốn tìm kiếm
     let find = {
         deleted:false
     }
@@ -54,7 +56,7 @@ module.exports.index = async (req,res)=>{
     // objectPagination.skip= (objectPagination.currentPage - 1) * (objectPagination.limitProduct);
 
     // const countProduct = await Products.countDocuments(find);
-    // // console.log(countProduct);
+    // // console.log(countProduct); đếm số sản phẩm có trong dữ liệu
     // const totalPages = Math.ceil(countProduct / objectPagination.limitProduct);
     // objectPagination.totalPages = totalPages;
     
@@ -71,6 +73,7 @@ module.exports.index = async (req,res)=>{
     });
 }
 
+//thay đổi trạng thái  1 sản phẩm
 module.exports.changeStatus = async (req,res)=>{
     const status = req.params.status;
     const id = req.params.id;
@@ -79,6 +82,7 @@ module.exports.changeStatus = async (req,res)=>{
     req.flash("success","Thay đổi trạng thái thành công!");
     res.redirect("back");
 }
+//thay đổi trạng thái nhiều sản phẩm
 module.exports.changeMultis = async (req,res)=>{
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
@@ -96,6 +100,7 @@ module.exports.changeMultis = async (req,res)=>{
             await Products.updateMany({_id:{$in:ids}},{deleted:true,deletedDate:new Date()})
             break;
         case("change-position"):
+            // console.log(ids);
             for(const item of ids){
                 let[id,position] = item.split("-");
                 position = parseInt(position);
@@ -133,10 +138,12 @@ module.exports.create = async(req,res)=>{
 }
 //[POST]/products/creat
 module.exports.createPost = async(req,res)=>{
-    console.log(req.file)
+    // console.log(req.file)
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.body.stock = parseInt(req.body.stock);
+
+    // tự động tăng position
     if(!req.body.position || req.body.position.trim() === ""){
         const countProduct = await Products.countDocuments();
         console.log(countProduct)
@@ -145,8 +152,69 @@ module.exports.createPost = async(req,res)=>{
     else{
         req.body.position = parseInt(req.body.position )
     }
-    req.body.thumbnail = `/uploads/${req.file.filename}`
+
+    if(req.file){
+         req.body.thumbnail = `/uploads/${req.file.filename}`
+    }
+   
     const product = new Products(req.body)
     product.save();
     res.redirect(`${configSystem.prefixAdmin}/products`)
+}
+
+//chỉnh sửa thông tin sản phẩm [GET] admin/product/editProduct/:id
+module.exports.editProduct = async(req,res)=>{
+    try{
+        // console.log(req.params.id)
+        const find = {
+            deleted:false,
+            _id:req.params.id
+        }
+        const product = await Products.findOne(find);
+        res.render('admin/pages/products/edit-product',{
+            pageTitle:"Chỉnh sửa sản phẩm",
+            product:product,
+        });
+    }
+    catch(error){
+        res.redirect(`${configSystem.prefixAdmin}/products`);
+    }
+    
+}
+module.exports.editPatch = async(req,res)=>{
+    const id = req.params.id;
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
+    req.body.position = parseInt(req.body.position )
+    if(req.file){
+         req.body.thumbnail = `/uploads/${req.file.filename}`
+    }
+    try {
+        await Products.updateOne({_id:id},req.body);   
+        req.flash("success",`Đã chỉnh sửa sản phẩm thành công!`);   
+    } catch (error) {
+        req.flash("error",`Chưa chỉnh sửa được sản phẩm!`);
+    }
+    res.redirect("back")
+}
+//trang chi tiết sản phẩm
+module.exports.detailProduct = async(req,res)=>{
+    try{
+        // console.log(req.params.id)
+        const find = {
+            deleted:false,
+            _id:req.params.id
+        }
+        const product = await Products.findOne(find);
+        console.log(product);
+        res.render('admin/pages/products/detail-product',{
+            pageTitle:product.title,
+            product:product,
+        });
+    }
+    catch(error){
+        res.redirect(`${configSystem.prefixAdmin}/products`);
+    }
+    
 }

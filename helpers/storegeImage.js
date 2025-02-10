@@ -5,7 +5,7 @@ module.exports = () =>{
           cb(null, './public/uploads')
         },
         filename: function (req, file, cb) {
-          const uniqueSuffix = Date.now();
+          const uniqueSuffix = Date.now();//thời gian tạo ảnh-tên ảnh
           cb(null, `${uniqueSuffix}-${file.originalname}`)
         }
       })

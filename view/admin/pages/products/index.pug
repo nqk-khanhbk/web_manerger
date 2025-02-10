@@ -80,7 +80,12 @@ block main
                       button-change-status
                       class="badge badge-warning") Ngừng hoạt động
                 td
-                  button(class="btn btn-primary btn-sm" data-id=item.id ) Sửa
+                  a(
+                    href=`${prefixAdmin}/products/editProduct/${item.id}`
+                    class="btn btn-primary btn-sm" data-id=item.id ) Sửa
+                  a(
+                    href=`${prefixAdmin}/products/detailProduct/${item.id}`
+                    class="btn btn-info btn-sm ml-1" data-id=item.id ) Chi tiết
                   button(class="btn btn-danger btn-sm ml-1" data-id=item.id button-delete) Xóa
   
   +pagination(pagination)

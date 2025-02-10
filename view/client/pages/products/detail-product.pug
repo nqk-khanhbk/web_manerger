@@ -1,0 +1,33 @@
+extends ../../layout/defaul.pug 
+include ../../mixins/box-head.pug
+
+block main
+    .container-2
+        .row 
+            .col-12 
+                +box-head("Chi tiết sản phẩm")           
+        
+        .product-container
+            if(product.thumbnail)
+                .product-image-container
+                    img(src=product.thumbnail class="product-image")
+            
+            .product-details
+                if(product.title)
+                    h2.text-dark.font-weight-bold.mb-3= product.title
+                
+                .product-info
+                    if(product.price)
+                        p Giá: <span class="text-danger fw-bold">#{product.price}$</span>
+                    if(product.discountPercentage)
+                        p Giảm giá: <span class="text-success fw-bold">#{product.discountPercentage}%</span>
+                    if(product.stock)
+                        p Còn lại: <span class="text-warning fw-bold">#{product.stock}</span>
+                
+                if(product.position)
+                    p Vị trí: <span class="text-muted">#{product.position}</span>
+                
+                if(product.description)
+                    .description
+                        h5.text-secondary Mô tả sản phẩm:
+                        p.text-muted= product.description

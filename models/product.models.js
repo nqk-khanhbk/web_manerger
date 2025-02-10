@@ -12,8 +12,8 @@ const schemaProducts = new mongoose.Schema({
   status: String,
   slug: {
      type: String,
-     slug: "title",
-     unique: true
+     slug: "title",// gọi theo tên tiêu đề
+     unique: true // để ko bị trùng tiêu đề
      },
   position: String,
   deleted:{
