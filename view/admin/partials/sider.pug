@@ -1,7 +1,19 @@
 .sider
     .inner-menu 
-      ul    
-        li
-          a(href=`${prefixAdmin}/deshboard`) Tổng quan 
-        li  
-          a(href=`${prefixAdmin}/products`) Sản phẩm
+        ul    
+            li
+                a(href=`${prefixAdmin}/deshboard`) Tổng quan 
+            li
+                a(href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne") Sản phẩm
+            div(id="collapseOne" class="collapse") 
+                ul(class="list-unstyled pl-3")
+                    li  
+                        a(href=`${prefixAdmin}/products-category` style={color:"red"}) Danh mục 
+                    li  
+                        a(href=`${prefixAdmin}/products` style={color:"red"}) Danh sách
+            li 
+                a(href=`${prefixAdmin}/roles`) Nhóm quyền
+            li  
+                a(href=`${prefixAdmin}/roles/permission`) Phân quyền
+            li  
+                a(href=`${prefixAdmin}/account`) Tài khoản

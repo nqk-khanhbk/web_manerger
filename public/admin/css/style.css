@@ -166,3 +166,37 @@
 }
 
 /* end chi tiết sp */
+
+/* css trang chi tiết product-category */
+.detail-product {
+    margin: 0;
+    padding: 0;
+    height: 400px;
+  }
+  
+  .container-product {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .category-card {
+    max-width: 400px;
+  }
+  
+  .category-title {
+    font-size: 24px;
+    color: green
+  }
+  
+  .category-status,
+  .category-position,
+  .category-created,
+  .category-updated {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+  }
+/* end */

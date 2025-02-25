@@ -1,0 +1,44 @@
+extends ../../layout/defaul.pug
+include ../../mixins/alert.pug
+block main
+  +alert-error("5000")
+  +alert-success("5000")
+  h1 Nhóm quyền
+  
+  .card.mb-3
+    .card-header Danh sách
+
+    .card-body
+      .row 
+        .col-8
+        .col-4(class="p-2")
+          a(href=`${prefixAdmin}/roles/create` class="btn btn-outline-success") +Thêm mới
+
+      table(class = "table table-hover table-sm" checkbox-multi)
+        thead 
+          tr  
+            th STT 
+            th Nhóm quyền 
+            th Mô tả ngắn 
+            th Hành động 
+
+        tbody 
+          if record.length > 0
+            each item, index in record
+              tr 
+                td #{index + 1}
+                td #{item.title}
+                td #{item.description}
+                td
+                  a(href=`${prefixAdmin}/roles/detail/${item.id}` class="btn btn-secondary btn-sm mr-1") Chi tiết
+                  a(href=`${prefixAdmin}/roles/edit/${item.id}` class="btn btn-warning btn-sm") Sửa 
+                  button(class="btn btn-danger btn-sm ml-1" data-id=item.id  button-delete) Xóa       
+
+    form(
+      action=""
+      data-path=`${prefixAdmin}/roles/delete`
+      id="form-button-delete"
+      method = "POST"
+      
+    )
+    script(src="/admin/js/product.js")

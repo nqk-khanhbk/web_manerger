@@ -4,10 +4,10 @@ include ../../mixins/select-tree.pug
 block main
 
     +alert-error("5000")
-    h2(class="mb-4") Thêm mới sản phẩm
+    h2(class="mb-4") Tạo mới danh mục sản phẩm
 
     form(
-        action=`${prefixAdmin}/products/create`
+        action=`${prefixAdmin}/products-category/create`
         id="form-create-product"
         method="POST"
         enctype="multipart/form-data"
@@ -30,15 +30,6 @@ block main
         textarea(
             name="description" id="des" rows="4" class="form-control textarea-mce"
             ) 
-     div(class="form-group")
-        label(for="price") Giá
-        input(id="price" type="number" name="price" class="form-control" value="0")
-     div(class="form-group")
-        label(for="discountPercentage") %Giảm giá
-        input(type="number" name="discountPercentage" id="discountPercentage" class="form-control" value="0")
-     div(class="form-group")
-        label(for="stock") Số lượng
-        input(type="number" name="stock" id="stock" class="form-control" value="0" min="0")
      div(class="form-group" upload-image)
         label(for="image") Ảnh
         input(type="file" name="thumbnail" id="image" class="form-control-file" accept ='image/*' upload-image-input)

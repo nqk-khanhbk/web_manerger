@@ -1,0 +1,64 @@
+extends ../../layout/defaul.pug
+include ../../mixins/search.pug
+include ../../mixins/change-multi.pug
+include ../../mixins/table-tree.pug
+include ../../mixins/filles-status
+block main
+  h1 Danh mục sản phẩm
+  .card.mb-3
+    .card-header Bộ lọc và tìm kiếm 
+    .card-body
+      .row 
+        .col-6
+          +filleStatus(filleStatus)
+        .col-6 
+          +search(keyword)
+  
+  .card.mb-3 
+    .card-header Danh sách 
+      .card-body 
+        .row
+          .col-4
+            +change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+          .col-4
+            .d-flex.align-items-start 
+              div(sort).d-flex
+                select(name="sort" class="form-control" sort-select)
+                  option(disabled selected) -- Lựa chọn sắp xếp --
+                  option(value="position-desc") Vị trí giảm dần 
+                  option(value="position-asc") Vị trí tăng dần 
+                  option(value="title-asc") Tiêu đề A-Z 
+                  option(value="title-desc") Tiêu đề Z-A 
+                button(class="btn btn-danger ml-2" sort-clear) Clear    
+          .col-4 
+            a(
+              href=`${prefixAdmin}/products-category/create`
+              class="btn btn-outline-success"
+            ) +Thêm mới
+        table(class="table table-hover table-sm" checkall-multi)
+          thead
+            tr 
+              th 
+                 input(class="checkall" type="checkbox")
+              th STT
+              th Hình ảnh 
+              th Tiêu đề
+              th Vị trí
+              th Trạng thái 
+              th Hành động
+          tbody
+            if(productCategory)
+              +table-tree(productCategory)  
+  form(
+      action= ""
+      id="form-change-status"
+      method="POST"
+      data-path=`${prefixAdmin}/products/change-status`
+    )
+  form(
+      action= ""
+      id="form-button-delete"
+      method="POST"
+      data-path=`${prefixAdmin}/products-category/delete`
+    )
+  script(src="/admin/js/product.js")

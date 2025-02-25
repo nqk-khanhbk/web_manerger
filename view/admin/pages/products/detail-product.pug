@@ -33,7 +33,7 @@ block main
             if(product.description)
                 .description.mt-4
                     h5.text-secondary Mô tả sản phẩm:
-                    p.text-muted= product.description
+                    p.text-muted !{product.description}
             
             .text-center.mt-5
                 a(href=`${prefixAdmin}/products/editProduct/${product.id}` class="btn btn-warning product-edit-btn") Chỉnh sửa

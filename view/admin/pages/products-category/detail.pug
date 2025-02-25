@@ -1,0 +1,15 @@
+extends ../../layout/defaul.pug
+
+block main
+   h2 Chi tiết danh mục sản phẩm 
+   .detail-product
+     .container-product
+        .category-card
+            if record
+                h1.category-title= record.title || "Không có tiêu đề"
+                p.category-status Trạng thái: #{record.status}
+                p.category-position Vị trí: #{record.position}
+                p.category-created Ngày tạo: #{record.createdAt}
+                p.category-updated Cập nhật lần cuối: #{record.updatedAt}
+            else
+                p Không có dữ liệu

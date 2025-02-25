@@ -4,16 +4,13 @@ mongoose.plugin(slug);
 
 const schemaProducts = new mongoose.Schema({
   title: String,
+  description: String,
+  thumbnail: String,
+  status: String,
   parent_id:{
     type:String,
     default:" "
   },
-  description: String,
-  price: Number,
-  discountPercentage: Number,
-  stock: Number,
-  thumbnail: String,
-  status: String,
   slug: {
      type: String,
      slug: "title",// gọi theo tên tiêu đề
@@ -28,6 +25,6 @@ const schemaProducts = new mongoose.Schema({
 },{
   timestamps:true,
 });
-const Product = mongoose.model("Product", schemaProducts, "Products");
+const ProductCategory = mongoose.model("ProductCategory", schemaProducts, "Products-category");
 
-module.exports = Product;
+module.exports = ProductCategory;

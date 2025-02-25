@@ -6,4 +6,7 @@ header.header
                    a(href="/admin/deshboard")
                       img(src='/images/logo.png' alt="logo")
             .col-9
+                div #{record}
+                div(class="text-right")
+                    a(href=`${prefixAdmin}/auth/logout` class="btn btn-danger btn-sm") Đăng xuất
             

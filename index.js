@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 var methodOverride = require('method-override')
@@ -11,6 +12,7 @@ const flash = require('express-flash');
 require('dotenv').config()
 
 const port = process.env.PORT;
+
 
 // gọi đến roure 
 const route = require('./routes/client/index.routes');
@@ -41,6 +43,8 @@ app.use(cookieParser("jdkkske"));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 
+//cấu hình Tinymce
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 //Routes
 route(app);

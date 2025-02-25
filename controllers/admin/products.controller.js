@@ -1,11 +1,11 @@
 
 // [GET] /products
 const Products = require('../../models/product.models');
-
+const ProductsCategory = require('../../models/product-category.models');
 const FilleStatusHelpers = require('../../helpers/fillesStatus.js');
 const searchHelpers = require('../../helpers/search.js');
 const objectPaginationHelpers = require('../../helpers/pagination.js');
-
+const createTreeHelpers = require('../../helpers/createTree.js');
 const configSystem = require('../../config/system.js');
 module.exports.index = async (req,res)=>{
    
@@ -62,7 +62,16 @@ module.exports.index = async (req,res)=>{
     
     //end pagination
 
-    const products =  await Products.find(find).sort({position:"desc"}).limit(objectPagination.limitProduct).skip(objectPagination.skip);
+    //sắp xếp sản phẩm theo tiêu chí
+    const sort={}
+    if(req.query.sortKey && req.query.sortValue){
+        sort[req.query.sortKey] = req.query.sortValue;
+    }
+    else{
+        sort.position= "desc";
+    }
+    //end sắp xếp sản phẩm
+    const products =  await Products.find(find).sort(sort).limit(objectPagination.limitProduct).skip(objectPagination.skip);
     // console.log(products);
     res.render('admin/pages/products/index',{
         pageTitle:"Trang products",
@@ -132,8 +141,16 @@ module.exports.deleteButton = async(req,res)=>{
 
 //Thêm mới 1 sản phẩm [GET]/product/create
 module.exports.create = async(req,res)=>{
+    let find={
+        deleted:false,
+    };
+    const record = await ProductsCategory.find(find);
+    // console.log(record)
+    const newRecord = createTreeHelpers.tree(record);
+    // console.log(newRecord)
     res.render('admin/pages/products/create-product',{
         pageTitle:"Thêm sản phẩm",
+        record:newRecord,
     });
 }
 //[POST]/products/creat
@@ -152,10 +169,10 @@ module.exports.createPost = async(req,res)=>{
     else{
         req.body.position = parseInt(req.body.position )
     }
-
-    if(req.file){
-         req.body.thumbnail = `/uploads/${req.file.filename}`
-    }
+    // khi đẩy upload ảnh lên server thì ko cần cái này,chuyển qua bên router
+    // if(req.file){
+    //      req.body.thumbnail = `/uploads/${req.file.filename}`
+    // }
    
     const product = new Products(req.body)
     product.save();
