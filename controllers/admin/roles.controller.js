@@ -10,9 +10,6 @@ module.exports.index =async  (req,res)=>{
         pageTitle:"Trang phân quyền",
         record:record,
     });
-    res.render('admin/layout/defaul',{
-        record:record,
-    });
 }
 
 //[GET]/roles/create

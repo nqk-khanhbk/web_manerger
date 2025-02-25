@@ -5,6 +5,7 @@ const productCategoryRoutes = require('./products-category.routes');
 const rolesRoutes = require('./roles.routes');
 const accountRoutes = require('./account.routes');
 const authRoutes = require('./auth.routes');
+const profileRoutes = require('./profile.routes');
 module.exports = (app)=>{
     const PATH_ADMIN = systemConfig.prefixAdmin;
     app.use(PATH_ADMIN +"/deshboard",deshboardRoutes);
@@ -13,4 +14,5 @@ module.exports = (app)=>{
     app.use(PATH_ADMIN +"/roles",rolesRoutes);
     app.use(PATH_ADMIN +"/account",accountRoutes);
     app.use(PATH_ADMIN +"/auth",authRoutes);
+    app.use(PATH_ADMIN +"/profile",profileRoutes);
 }

@@ -224,3 +224,19 @@ if (sort) {
   }
 }
 
+// code phần click vào avatar ra các thứ như đăng xuất và thông tin tk
+document.addEventListener("DOMContentLoaded", function () {
+  const avatar = document.querySelector(".avatar");
+  const dropdown = document.querySelector(".dropdown-menu");
+  
+  avatar.addEventListener("click", function (event) {
+    event.stopPropagation();
+    dropdown.classList.toggle("active");
+  });
+  
+  document.addEventListener("click", function (event) {
+    if (!avatar.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.classList.remove("active");
+    }
+  });
+});

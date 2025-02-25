@@ -1,0 +1,23 @@
+extends ../../layout/defaul.pug
+include ../../mixins/alert.pug
+block main
+  +alert-error("5000")
+  +alert-success("5000")
+  h1 Tài khoản
+  .profile
+    .profile-container
+      .avatar-section
+        img.avatarr(src="/images/avatar.jpg" alt="Avatar")
+      .info-section
+        .info-item
+          span.info-label Tên:
+          span Nguyễn Quốc Khánh
+        .info-item
+          span.info-label Email:
+          span khanh.nq225866@sis.hust.edu.vn
+        .info-item
+          span.info-label Số điện thoại:
+          span 0123-456-789
+        .info-item
+          span.info-label Vai trò:
+          span Người dùng
