@@ -1,41 +1,42 @@
 extends ../../layout/defaul.pug
 
 block main
-    .container.py-5
-        .product-detail.card.shadow-lg.p-4.rounded
-            h1.text-center.text-primary.mb-4 Trang chi tiết sản phẩm 
-            
-            if(product.title)
-                h2.text-dark.font-weight-bold.mb-3= product.title
-            
-            .product-info.mb-4
-                if(product.price)
-                    p Giá: <span class="text-danger fw-bold">#{product.price}$</span>
-                if(product.discountPercentage)
-                    p Giảm giá: <span class="text-success fw-bold">#{product.discountPercentage}%</span>
-                if(product.stock)
-                    p Còn lại: <span class="text-warning fw-bold">#{product.stock}</span>
-            
-            if(product.thumbnail)
-                .text-center.mb-4
-                    img(src=product.thumbnail class="product-image")
-            
-            if(product.status)
-                p Trạng thái: 
-                if(product.status === "active")
-                    span(class="badge bg-success product-status") Hoạt động
-                else
-                    span(class="badge bg-danger product-status") Ngừng hoạt động
-            
-            if(product.position)
-                p Vị trí: <span class="text-muted">#{product.position}</span>
-            
-            if(product.description)
-                .description.mt-4
-                    h5.text-secondary Mô tả sản phẩm:
-                    p.text-muted !{product.description}
-            
-            .text-center.mt-5
-                a(href=`${prefixAdmin}/products/editProduct/${product.id}` class="btn btn-warning product-edit-btn") Chỉnh sửa
+     if(role.permission.includes("products_view"))
+        .container.py-5
+            .product-detail.card.shadow-lg.p-4.rounded
+                h1.text-center.text-primary.mb-4 Trang chi tiết sản phẩm 
+                
+                if(product.title)
+                    h2.text-dark.font-weight-bold.mb-3= product.title
+                
+                .product-info.mb-4
+                    if(product.price)
+                        p Giá: <span class="text-danger fw-bold">#{product.price}$</span>
+                    if(product.discountPercentage)
+                        p Giảm giá: <span class="text-success fw-bold">#{product.discountPercentage}%</span>
+                    if(product.stock)
+                        p Còn lại: <span class="text-warning fw-bold">#{product.stock}</span>
+                
+                if(product.thumbnail)
+                    .text-center.mb-4
+                        img(src=product.thumbnail class="product-image")
+                
+                if(product.status)
+                    p Trạng thái: 
+                    if(product.status === "active")
+                        span(class="badge bg-success product-status") Hoạt động
+                    else
+                        span(class="badge bg-danger product-status") Ngừng hoạt động
+                
+                if(product.position)
+                    p Vị trí: <span class="text-muted">#{product.position}</span>
+                
+                if(product.description)
+                    .description.mt-4
+                        h5.text-secondary Mô tả sản phẩm:
+                        p.text-muted !{product.description}
+                
+                .text-center.mt-5
+                    a(href=`${prefixAdmin}/products/editProduct/${product.id}` class="btn btn-warning product-edit-btn") Chỉnh sửa
 
-                script(src="/admin/js/product.js")
+                    script(src="/admin/js/product.js")

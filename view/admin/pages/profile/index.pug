@@ -7,17 +7,17 @@ block main
   .profile
     .profile-container
       .avatar-section
-        img.avatarr(src="/images/avatar.jpg" alt="Avatar")
+        img.avatarr(src=user.avatar alt=user.fullName)
       .info-section
         .info-item
           span.info-label Tên:
-          span Nguyễn Quốc Khánh
+          span #{user.fullName}
         .info-item
           span.info-label Email:
-          span khanh.nq225866@sis.hust.edu.vn
+          span #{user.email}
         .info-item
           span.info-label Số điện thoại:
-          span 0123-456-789
+          span #{user.phone}
         .info-item
           span.info-label Vai trò:
           span Người dùng

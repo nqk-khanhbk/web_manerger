@@ -8,9 +8,11 @@ header.header
             .col-9
                 .text-right
                     .avatar-container
-                       img.avatar(src="/images/avatar.jpg" alt="Avatar")
+                       .thong-tin
+                          div(class="fullName") #{user.fullName}
+                          img.avatar(src= user.avatar alt=user.fullName)
                        .dropdown-menu
-                           a(href=`${prefixAdmin}/profile`) Thông tin tài khoản
-                           a(href=`${prefixAdmin}/auth/logout` class="btn btn-danger btn-sm") Đăng xuất
+                            a(href=`${prefixAdmin}/profile`) Thông tin tài khoản
+                            a(href=`${prefixAdmin}/auth/logout` class="btn btn-danger btn-sm") Đăng xuất
                 
             
