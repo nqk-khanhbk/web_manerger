@@ -1,5 +1,4 @@
-
-// [GET] /products
+const Account = require('../../models/account.models')
 const Products = require('../../models/product.models');
 const ProductsCategory = require('../../models/product-category.models');
 const FilleStatusHelpers = require('../../helpers/fillesStatus.js');
@@ -73,6 +72,16 @@ module.exports.index = async (req,res)=>{
     //end sắp xếp sản phẩm
     const products =  await Products.find(find).sort(sort).limit(objectPagination.limitProduct).skip(objectPagination.skip);
     // console.log(products);
+    // hiển thị tên người tạo
+    for (const product of products) {
+        const user = await Account.findOne({
+            _id:product.createdBy.account_id,
+        });
+        if(user){
+            product.accountFullName = user.fullName;
+        }
+        
+    }
     res.render('admin/pages/products/index',{
         pageTitle:"Trang products",
         product:products,
@@ -106,7 +115,13 @@ module.exports.changeMultis = async (req,res)=>{
             
             break;
         case("delete-all"):
-            await Products.updateMany({_id:{$in:ids}},{deleted:true,deletedDate:new Date()})
+            await Products.updateMany({_id:{$in:ids}},{
+                deleted:true, 
+                deleteBy: {
+                    account_id: res.locals.user.id,
+                    deletedAt: new Date(),
+              },
+            });
             break;
         case("change-position"):
             // console.log(ids);
@@ -134,7 +149,13 @@ module.exports.deleteButton = async(req,res)=>{
     // await Products.deleteOne({_id:id});
 
     // xóa mềm 1 sản phẩm trong database
-    await Products.updateOne({_id:id},{deleted:true,deletedDate:new Date()});
+    await Products.updateOne({_id:id},{
+        deleted:true, 
+        deleteBy: {
+            account_id: res.locals.user.id,
+            deletedAt: new Date(),
+      },
+    });
     req.flash("success",`Đã xóa thành công sản phẩm!`);
     res.redirect("back");//quay lại trang
 }
@@ -159,7 +180,7 @@ module.exports.createPost = async(req,res)=>{
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.body.stock = parseInt(req.body.stock);
-
+    console.log(req.body)
     // tự động tăng position
     if(!req.body.position || req.body.position.trim() === ""){
         const countProduct = await Products.countDocuments();
@@ -174,8 +195,13 @@ module.exports.createPost = async(req,res)=>{
     //      req.body.thumbnail = `/uploads/${req.file.filename}`
     // }
    
+    //làm thêm tính năng lưu thông tin người tạo khi tạo product
+    req.body.createdBy = {
+        account_id:res.locals.user.id,
+    }
     const product = new Products(req.body)
     product.save();
+    req.flash("success", "Tạo thành công sản phẩm");
     res.redirect(`${configSystem.prefixAdmin}/products`)
 }
 

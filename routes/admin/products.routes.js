@@ -30,7 +30,8 @@ router.delete('/delete/:id',controllers.deleteButton)
 
 //thêm mới 1 sản phẩm
 router.get('/create',controllers.create)
-router.post('/create',upload.single('thumbnail'),
+router.post('/create',
+  upload.single('thumbnail'),
   uploadImage.upload,
   validate.createValidate,controllers.createPost)
 

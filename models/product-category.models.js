@@ -11,6 +11,13 @@ const schemaProducts = new mongoose.Schema({
     type:String,
     default:" "
   },
+  createdBy:{
+    account_id:String,
+    createdAt:{
+      type:Date,
+      default:Date.now()
+    }
+  },
   slug: {
      type: String,
      slug: "title",// gọi theo tên tiêu đề
@@ -20,6 +27,10 @@ const schemaProducts = new mongoose.Schema({
   deleted:{
     type:Boolean,
     default:false
+  },
+  deleteBy: {
+    account_id: String,
+    deletedAt: Date,
   },
   deletedDate:Date,
 },{

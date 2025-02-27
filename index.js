@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 const app = express();
 const database = require('./config/database.js');
 const flash = require('express-flash');
-
+const moment = require('moment');
 //cấu hình env
 require('dotenv').config()
 
@@ -52,9 +52,7 @@ routeAdmin(app);
 
 //App local variable(để có thể để ở bất cứ đâu trong pj) ở đâu cần dùng đến thì dùng prefixAdmin(chỉ dùng trong file pug)
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
-
-
-
+app.locals.moment = moment;
 
 
 

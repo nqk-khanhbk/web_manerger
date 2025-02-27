@@ -1,4 +1,4 @@
-
+const Account = require('../../models/account.models.js');
 const ProductsCategory = require('../../models/product-category.models');
 const configSystem = require('../../config/system.js');
 const createTreeHelpers = require('../../helpers/createTree.js');
@@ -22,6 +22,17 @@ module.exports.index = async (req,res)=>{
     }
     //END SEARCH
     const productCategory = await ProductsCategory.find(find);
+
+    // hiển thị tên người tạo
+    for (const product of productCategory) {
+        const user = await Account.findOne({
+            _id:product.createdBy.account_id,
+        });
+        if(user){
+            product.accountFullName = user.fullName;
+        }
+        
+    }
     const newProductCategory = createTreeHelpers.tree(productCategory);
     // console.log(newProductCategory)
     res.render('admin/pages/products-category/index',{
@@ -57,6 +68,9 @@ module.exports.createPost = async(req,res)=>{
     else{
         req.body.position = parseInt(req.body.position )
     }
+    req.body.createdBy = {
+        account_id:res.locals.user.id,
+    };
     // khi đẩy upload ảnh lên server thì ko cần cái này,chuyển qua bên router
     // if(req.file){
     //      req.body.thumbnail = `/uploads/${req.file.filename}`
@@ -64,6 +78,7 @@ module.exports.createPost = async(req,res)=>{
    
     const productCategory = new ProductsCategory(req.body)
     productCategory.save();
+    req.flash("success", "Tạo thành công danh mục sản phẩm");
     res.redirect(`${configSystem.prefixAdmin}/products-category`)
 }
 //GET/products-category/edit/:id
@@ -107,7 +122,15 @@ module.exports.delete = async (req, res) => {
     const id = req.params.id;
     // console.log(id);
     try {
-      await ProductsCategory.updateOne({_id:id},{deleted:true,deletedDate:new Date()});
+      await ProductsCategory.updateOne(
+        {_id:id},
+        {
+            deleted:true, 
+            deleteBy: {
+                account_id: res.locals.user.id,
+                deletedAt: new Date(),
+          },
+        });
       req.flash("success", "Xóa danh mục thành công");
       res.redirect("back");//quay lại trang
     } 

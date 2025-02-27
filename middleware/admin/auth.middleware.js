@@ -2,7 +2,7 @@ const configSystem = require('../../config/system.js');
 const Account = require('../../models/account.models.js');
 const Roles = require('../../models/roles.models.js');
 module.exports.requireAuth= async (req,res,next)=>{
-    console.log(req.cookies.token);
+    // console.log(req.cookies.token);
     //nếu khác token thì quay lại trang đăng nhập
     if(!req.cookies.token){
         res.redirect(`${configSystem.prefixAdmin}/auth/login`)

@@ -20,9 +20,20 @@ const schemaProducts = new mongoose.Schema({
      unique: true // để ko bị trùng tiêu đề
      },
   position: String,
+  createdBy:{
+    account_id:String,
+    createdAt:{
+      type:Date,
+      default:Date.now(),
+    }
+  },
   deleted:{
     type:Boolean,
     default:false
+  },
+  deleteBy: {
+    account_id: String,
+    deletedAt: Date,
   },
   deletedDate:Date,
 },{
