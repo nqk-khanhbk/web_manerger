@@ -1,2 +1,3 @@
 # Web_manerger
-## H
+## Để xem chi tiết trang admin
+
