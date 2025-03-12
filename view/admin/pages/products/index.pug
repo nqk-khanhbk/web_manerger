@@ -54,6 +54,7 @@ block main
                 th Giá
                 th Vị trí
                 th Người tạo
+                th Update mới nhất
                 th Trạng thái 
                 th Hành động
             tbody
@@ -82,6 +83,11 @@ block main
                     p 
                       +formatDate(item.createdBy.createdAt)
                   td 
+                    - const updatedBy = item.updatedBy.slice(-1)[0];
+                    if(updatedBy)
+                      p #{updatedBy.accountFullName}
+                      +formatDateTime(updatedBy.updatedAt)
+                  td 
                     if item.status == 'active'
                       a(
                         href="javascript:;"
@@ -101,7 +107,7 @@ block main
                     if(role.permission.includes("products_edit"))
                       a(
                         href=`${prefixAdmin}/products/editProduct/${item.id}`
-                        class="btn btn-primary btn-sm" data-id=item.id ) Sửa
+                        class="btn btn-primary btn-sm ml-1" data-id=item.id ) Sửa
                     if(role.permission.includes("products_view"))
                       a(
                         href=`${prefixAdmin}/products/detailProduct/${item.id}`

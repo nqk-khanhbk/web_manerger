@@ -1,18 +1,19 @@
 .sider
+
     .inner-menu 
         ul    
             li
                 a(href=`${prefixAdmin}/deshboard`) Tổng quan 
             li
                 a(href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne") Sản phẩm
-            div(id="collapseOne" class="collapse") 
-                ul(class="list-unstyled pl-3")
-                    if(role.permission.includes("products-category_view"))
-                        li  
-                            a(href=`${prefixAdmin}/products-category` style={color:"red"}) Danh mục 
-                    if(role.permission.includes("products_view"))
-                        li  
-                            a(href=`${prefixAdmin}/products` style={color:"red"}) Danh sách
+                div(id="collapseOne" class="collapse") 
+                    ul(class="list-unstyled pl-3")
+                        if(role.permission.includes("products-category_view"))
+                            li  
+                                a(href=`${prefixAdmin}/products-category` style={color:"red"}) Danh mục   
+                        if(role.permission.includes("products_view"))       
+                            li  
+                                a(href=`${prefixAdmin}/products` style={color:"red"}) Danh sách
             if(role.permission.includes("roles_view"))
                 li 
                     a(href=`${prefixAdmin}/roles`) Nhóm quyền

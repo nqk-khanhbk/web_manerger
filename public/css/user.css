@@ -1,0 +1,95 @@
+/* Định dạng nền tổng thể */
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+/* Container của form */
+.container {
+    width: 400px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Tiêu đề */
+.inner-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Nhãn */
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Input */
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input.form-control:focus {
+    border-color: #e91e63;
+    outline: none;
+}
+
+/* Nút đăng ký */
+button.btn-primary {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #64b5f6, #ff4081);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+button.btn-primary:hover {
+    opacity: 0.8;
+}
+
+/* Phần yêu cầu đăng nhập */
+.form-requiz {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px
+}
+.form-requiz .form-login{
+    margin-left: 110px;
+}
+.form-requiz a {
+    color: #e91e63;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.form-requiz a:hover {
+    text-decoration: underline;
+}

@@ -4,6 +4,9 @@ const controllers = require('../../controllers/client/product.controller');
 //code phần router
 router.get('/',controllers.index )
 
+// làm thanh danh mục sản phẩm
+router.get('/:slugCategory',controllers.category);
+
 //chi tiet sanr phẩm bên client
-router.get('/detail/:slug',controllers.detail)
+router.get('/detail/:slugProduct',controllers.detail)
 module.exports=router;

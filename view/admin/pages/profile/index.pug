@@ -1,23 +1,38 @@
 extends ../../layout/defaul.pug
 include ../../mixins/alert.pug
+
 block main
   +alert-error("5000")
   +alert-success("5000")
+
   h1 Tài khoản
   .profile
     .profile-container
-      .avatar-section
-        img.avatarr(src=user.avatar alt=user.fullName)
-      .info-section
+      .left-section
+        .avatar-section
+          img.avatarr(src=user.avatar alt=user.fullName)
+        a(
+          href=`${prefixAdmin}/profile/edit`
+          class="btn btn-primary"
+        ) Cập nhật
+      .right-section
         .info-item
           span.info-label Tên:
-          span #{user.fullName}
+          if(user.fullName)
+            span #{user.fullName}
         .info-item
           span.info-label Email:
-          span #{user.email}
+          if(user.email)
+            span #{user.email}
         .info-item
           span.info-label Số điện thoại:
-          span #{user.phone}
+          if(user.phone)
+            span #{user.phone}
+        .info-item
+          span.info-label Trạng thái:
+          span 
+            b #{user.status === "active" ? "Hoạt động" : "Dừng hoạt động"}
         .info-item
           span.info-label Vai trò:
-          span Người dùng
+          if(role.title)
+            span #{role.title}

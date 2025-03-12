@@ -1,33 +1,59 @@
-extends ../../layout/defaul.pug 
+extends ../../layout/defaul.pug
 include ../../mixins/box-head.pug
-
+include ../../mixins/alert.pug
 block main
-    .container-2
+    +alert-success("3000")
+    .header-title 
+        a.back-button(href="javascript:void(0);" button-go-back) >>Quay lại
         .row 
             .col-12 
-                +box-head("Chi tiết sản phẩm")           
-        
-        .product-container
-            if(product.thumbnail)
-                .product-image-container
-                    img(src=product.thumbnail class="product-image")
+                h1 Chi tiết sản phẩm
+    .product-detail
+        .container.my-5
+            .row
+                .col-md-6
+                    .inner-thumb
+                        img(src=product.thumbnail, alt=product.title, class="img-fluid")
+                .col-md-6
+                    h1(class="inner-title") #{product.title}
+                    if (product.category)
+                        div(class="inner-category")
+                            span Danh mục: 
+                            a(href=`/products/${product.category.slug}`) #{product.category.title}
+                    if (product.priceNew)
+                        div(class="inner-price-new") Giá: <span id="price">#{product.priceNew}</span> $
+                    if (product.price && product.discountPercentage)
+                        div(class="inner-price-old") Giá cũ: #{product.price} $
+                    if (product.discountPercentage)
+                        div(class="inner-percent") Giảm tới: <span>#{product.discountPercentage}%</span>
+                    if (product.stock)
+                        div(class="inner-stock") Còn lại: <span>#{product.stock}</span> sản phẩm
+                    
+                    form(action=`/cart/add/${product.id}`, method="POST")
+                        .quantity-box.d-flex.align-items-center
+                            button(type="button", class="btn btn-outline-secondary", id="decrease") -
+                            input(
+                                id="quantity"
+                                class="form-control text-center mx-2"
+                                type="number"
+                                name="quantity"
+                                value="1"
+                                min="1"
+                                max=product.stock
+                                style="width: 60px;"
+                            )
+                            button(type="button", class="btn btn-outline-secondary", id="increase") +
+                        
+                        div(class="total-price mt-2") Tổng tiền: <span id="total-price">#{product.priceNew}</span> $
+                        
+                        button(
+                            type="submit"
+                            class="btn btn-success btn-block mt-3"
+                        ) Thêm vào giỏ hàng
             
-            .product-details
-                if(product.title)
-                    h2.text-dark.font-weight-bold.mb-3= product.title
-                
-                .product-info
-                    if(product.price)
-                        p Giá: <span class="text-danger fw-bold">#{product.price}$</span>
-                    if(product.discountPercentage)
-                        p Giảm giá: <span class="text-success fw-bold">#{product.discountPercentage}%</span>
-                    if(product.stock)
-                        p Còn lại: <span class="text-warning fw-bold">#{product.stock}</span>
-                
-                if(product.position)
-                    p Vị trí: <span class="text-muted">#{product.position}</span>
-                
-                if(product.description)
-                    .description
-                        h5.text-secondary Mô tả sản phẩm:
-                        p.text-muted !{product.description}
+            hr
+            .container.my-5
+                .row
+                  .col-12
+                    +box-head("Mô tả sản phẩm")
+                    .inner-desc !{product.description}

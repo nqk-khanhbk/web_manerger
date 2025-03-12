@@ -80,7 +80,15 @@ module.exports.index = async (req,res)=>{
         if(user){
             product.accountFullName = user.fullName;
         }
-        
+        // phaan lay thoong tin nhiều người
+        // lay thong tin nguoi update cuoi cungf
+        const updateBy = product.updatedBy.slice(-1)[0];
+        if(updateBy){
+        const userUpdated = await Account.findOne({
+            _id : updateBy.account_id
+        });
+        updateBy.accountFullName = userUpdated.fullName;
+        }
     }
     res.render('admin/pages/products/index',{
         pageTitle:"Trang products",
@@ -180,7 +188,7 @@ module.exports.createPost = async(req,res)=>{
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.body.stock = parseInt(req.body.stock);
-    console.log(req.body)
+    // console.log(req.body)
     // tự động tăng position
     if(!req.body.position || req.body.position.trim() === ""){
         const countProduct = await Products.countDocuments();
@@ -214,9 +222,13 @@ module.exports.editProduct = async(req,res)=>{
             _id:req.params.id
         }
         const product = await Products.findOne(find);
+        const category = await ProductsCategory.find({ deleted: false });
+        const newCategory = createTreeHelpers.tree(category);
+        // console.log(product)
         res.render('admin/pages/products/edit-product',{
             pageTitle:"Chỉnh sửa sản phẩm",
             product:product,
+            category: newCategory,
         });
     }
     catch(error){
@@ -234,7 +246,18 @@ module.exports.editPatch = async(req,res)=>{
          req.body.thumbnail = `/uploads/${req.file.filename}`
     }
     try {
-        await Products.updateOne({_id:id},req.body);   
+        const updatedBy = {
+            account_id: res.locals.user.id,
+            updatedAt: new Date(),
+          };
+        await Products.updateOne({_id:id}, 
+            {
+                //luu car update truowcs dos
+                ...req.body,
+                $push: {
+                  updatedBy: updatedBy,
+                },
+              });   
         req.flash("success",`Đã chỉnh sửa sản phẩm thành công!`);   
     } catch (error) {
         req.flash("error",`Chưa chỉnh sửa được sản phẩm!`);
