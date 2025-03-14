@@ -21,14 +21,31 @@ header.header
             form(action="/search" method ="GET")
               input(class="input" type="text" name="keyword" laceholder="Nhập từ cần tìm" value=keyword)  
               button(class='icons-search' type="submit") Tìm
-        .inner-cart 
-          a(href="/cart")
-            div(class="image-cart")
-              img(src="/images/cart.png" alt="Logo card")
-              div(class="dot") #{miniCart ? miniCart.totalQuantity : 0}
         .inner-right 
-          //- .login Đăng nhập 
-          a(href='/user/register')
-           .logout Đăng ký
+          .inner-cart 
+            a(href="/cart")
+              div(class="image-cart")
+                img(src="/images/cart.png" alt="Logo card")
+                div(class="dot") #{miniCart ? miniCart.totalQuantity : 0}
+          if(user)
+            .inner-avatar 
+              .inner-avatar_img
+                img(src=user.avatar alt='Avatar' class="avatar" onclick="toggleDropdown()") 
+              .dropdown-menu#userDropdown
+                .dropdown-header
+                  img(src=user.avatar alt='Avatar' class="dropdown-avatar")
+                  .dropdown-info
+                    .inforName #{user.fullName}
+                    .inforEmail #{user.email}
+                hr
+                a(href="/user/profile" class="dropdown-item") Thông tin cá nhân
+                a(href="/user/change-password" class="dropdown-item") Đổi mật khẩu
+                a(href="/user/logout" class="dropdown-item") Đăng xuất
+            
+          else 
+            a(href='/user/login')
+              .login Đăng nhập 
+            a(href='/user/register')
+              .logout Đăng ký
 
             

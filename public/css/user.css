@@ -1,3 +1,61 @@
+/* css phần hiển thị thông báo */
+[show-alert] {
+    position: fixed;
+    top: 80px;
+    right: 15px;
+    z-index: 999;
+    width: 300px;
+    padding: 15px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[show-alert].alert-hidden {
+    animation-name: alert-hidden;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    display: none;
+}
+
+@keyframes alert-hidden {
+    from {
+        right: 15px;
+    }
+    to {
+        right: -100%;
+        display: none;
+    }
+}
+
+[show-alert] [close-alert] {
+    background: #ffffffc4;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    position: absolute;
+    top: -7px;
+    right: -7px;
+}
+
+/* Thanh tiến trình */
+[show-alert] [progress-bar] {
+    height: 5px;
+    background-color: #28a745;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 5px 5px;
+    transition: width linear;
+}
+
+/* end hiển thị thông báo */
 /* Định dạng nền tổng thể */
 .register {
     display: flex;
@@ -21,7 +79,7 @@
 
 /* Tiêu đề */
 .inner-title {
-    font-size: 24px;
+    font-size: 39px;
     font-weight: bold;
     color: #333;
     text-align: center;
@@ -59,7 +117,7 @@ button.btn-primary {
     width: 100%;
     padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     background: linear-gradient(135deg, #64b5f6, #ff4081);
     color: white;
     font-size: 16px;
@@ -93,3 +151,16 @@ button.btn-primary:hover {
 .form-requiz a:hover {
     text-decoration: underline;
 }
+ /* css trang đăng nhập */
+.inner-form .text-right{
+    margin-bottom: 15px;
+}
+.inner-form .text-right a{
+    color: #e91e63;
+    font-weight: bold;
+    text-decoration: none;
+}
+.inner-form .text-right a:hover{
+    text-decoration: underline;
+}
+ /* end trang đăng nhập */

@@ -74,3 +74,18 @@ if(buttonGoBack.length>0){
     });
   });
 }
+// xử lý dropdown chỗ lấy thông tin user
+function toggleDropdown() {
+  let dropdown = document.getElementById("userDropdown");
+  dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+}
+
+// Ẩn menu khi click ra ngoài
+document.addEventListener("click", function (event) {
+  let dropdown = document.getElementById("userDropdown");
+  let avatar = document.querySelector(".avatar");
+
+  if (!avatar.contains(event.target) && !dropdown.contains(event.target)) {
+    dropdown.style.display = "none";
+  }
+});
