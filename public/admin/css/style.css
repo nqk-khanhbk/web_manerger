@@ -41,6 +41,15 @@
     transition: background-color 0.3s;
     margin-bottom: 1px solid #ddd;
 }
+.sider .inner-menu .wrap{
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+.sider .inner-menu .wrap i{
+  color: #000;
+  margin-left: 10px;
+}
 .body .main{
     position: relative;
     width: calc(100% - 200px);

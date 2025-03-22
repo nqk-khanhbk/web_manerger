@@ -28,6 +28,15 @@ database.connect();
 //method-override
 app.use(methodOverride('_method'))
 
+//Socket IO
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+global._io = io
+
+//End Socket
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -54,8 +63,14 @@ routeAdmin(app);
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.locals.moment = moment;
 
+// nếu truy cập sai link sẽ vào trang lỗi 404
+app.get("*",(req,res) =>{
+  res.render("client/pages/errors/404",{
+  pageTitle : "404 Not Found",
+});
+});
 
-
-app.listen(port, () => {
+//đổi app thành server khi cài cấu hình socketIo
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

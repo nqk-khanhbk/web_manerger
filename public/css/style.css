@@ -148,7 +148,7 @@
     cursor: pointer;
     color: #000;
     font-weight: 500;
-    padding: 10px 20px;
+    padding: 5px 8px;
     border: 1px solid #ddd;
     border-radius: 8px;
     transition: background-color 0.3s;
@@ -539,4 +539,31 @@
   }
   
 /* end trang thanh toán */
+
+
+/* css trang thông tin cá nhân */
+.profile-container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .avatar2 {
+    width: 100%;
+    aspect-ratio: 4/3;
+  }
+  .avatar img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+  }
+  hr {
+    width: 80%;
+    margin: 10px auto;
+    border-top: 2px solid #ddd;
+  }
+/* end trang thông tin cá nhân */
+
 

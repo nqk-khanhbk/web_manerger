@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const controllers = require('../../controllers/client/user.controller');
 const userValidate = require('../../validates/client/user.validate');
+const authMiddleware = require('../../middleware/client/auth.middleware')
 //code phần router
 //[GET]/user/register
 router.get('/register',controllers.register)
@@ -26,4 +27,7 @@ router.post('/password/otp',controllers.otpPasswordPost);
 //reset lại mật khẩu [GET]/user/password/reset
 router.get('/password/reset',controllers.resetPassword);
 router.post('/password/reset',controllers.resetPasswordPost);
+
+//  Thông tin cá nhân
+router.get('/profile',authMiddleware.requireAuth,controllers.profile)
 module.exports=router;

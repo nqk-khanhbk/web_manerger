@@ -9,8 +9,8 @@ header.header
                 .text-right
                     .avatar-container
                        .thong-tin
-                          div(class="fullName") #{user.fullName}
-                          img.avatar(src= user.avatar alt=user.fullName)
+                          div(class="fullName") #{user?user.fullName:" "}
+                          img.avatar(src= (user?user.avatar:"") alt=(user?user.fullName:" "))
                        .dropdown-menu
                             a(href=`${prefixAdmin}/profile`) Thông tin tài khoản
                             a(href=`${prefixAdmin}/auth/logout` class="btn btn-danger btn-sm") Đăng xuất
