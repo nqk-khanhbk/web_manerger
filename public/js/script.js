@@ -89,3 +89,23 @@ document.addEventListener("click", function (event) {
     dropdown.style.display = "none";
   }
 });
+// Phần swiper cho trang home giao diện
+document.addEventListener("DOMContentLoaded", function () {
+  var swiper = new Swiper(".mySwiper", {
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+});
+//end swiper cho trang giao diện

@@ -2,6 +2,20 @@ extends ../../layout/defaul.pug
 include ../../mixins/box-head.pug
 include ../../mixins/product-layout.pug
 block main
+   .home
+     div(class="swiper mySwiper")
+        div(class="swiper-wrapper")
+            div(class="swiper-slide")
+              img(src='./images/anh1.jpg')
+            div(class="swiper-slide")
+              img(src='./images/anh2.jpg')
+            div(class="swiper-slide") 
+              img(src='./images/anh3.jpg')
+            div(class="swiper-slide") 
+              img(src='./images/anh4.jpg')
+        div(class="swiper-button-next")
+        div(class="swiper-button-prev")
+        div(class="swiper-pagination")
    .container-2
         .row 
             .col-12 
