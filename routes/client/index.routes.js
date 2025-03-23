@@ -7,6 +7,7 @@ const cartRoutes = require('./cart.routes');
 const checkOutRoutes = require('./checkout.routes');
 const userRoutes = require('./user.routes');
 const chatRoutes = require('./chat.routes');
+const connectRoutes = require('./connect.routes');
 const userMiddleware = require('../../middleware/client/user.middleware')
 const settingMiddleware = require('../../middleware/client/setting.middleware')
 module.exports = (app) =>{
@@ -15,6 +16,7 @@ module.exports = (app) =>{
     app.use(userMiddleware.infoUser)
     app.use(cartMiddleware.cartId)
     app.use('/', homeRoutes)  
+    app.use('/connect',connectRoutes)
     app.use('/products', productRoures);
     app.use('/search', searchRoutes);
     app.use('/cart',cartRoutes);

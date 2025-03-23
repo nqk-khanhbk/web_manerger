@@ -1,0 +1,47 @@
+extends ../../layout/defaul.pug 
+include ../../mixins/box-head.pug
+include ../../mixins/product-layout.pug
+block main
+    nav
+      a(href="/") Trang chủ 
+      span > 
+      a(href="#") Liên hệ tư vấn và hợp tác cùng Muka
+
+    .connect
+      .left
+        h2 Trụ sở chính Hà Nội
+        p Công Ty TNHH Công Nghệ Và Dịch Vụ Muka
+        p Địa chỉ: Định Công - Hoàng Mai - Hà Nội 
+        p Hotline: 0173388383
+        p Email: contact@muka.kain
+
+      .right
+        h2 Liên hệ
+        form(action="#" method="post")
+          .form-groupp
+            label Họ và tên*
+            input(type="text" name="name" class="connect-input" required)
+          
+          .form-groupp
+            label Số điện thoại*
+            input(type="tel" name="phone" class="connect-input" required)
+          
+          .form-groupp
+            label Tiêu đề
+            input(type="text" name="subject" class="connect-input")
+          
+          .form-groupp
+            label Nội dung
+            textarea(name="message" rows="4")
+          
+          button(type="submit" class="connect-button") Gửi yêu cầu
+    
+    .map-container
+      iframe(
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.858083935809!2d105.76487161476324!3d21.0381328928436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab3f56f5f15b%3A0x5c9c6e47658a7374!2sHanoi!5e0!3m2!1sen!2s!4v1645541629335!5m2!1sen!2s"
+        width="100%"
+        height="550"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+      )
